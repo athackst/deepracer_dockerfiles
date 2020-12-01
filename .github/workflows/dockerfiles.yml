@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Update date
         run: |
-          echo "::set-env name=TODAY::$(date +'%Y-%m-%d')"
+          echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
