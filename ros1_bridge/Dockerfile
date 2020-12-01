@@ -2,37 +2,38 @@
 #
 # Build the ros1 messages
 # ------------------------
-FROM athackst/ros:melodic-dev as ros_builder
+FROM athackst/ros:melodic-dev AS ros_builder
 
 WORKDIR /workspaces/ros
 
 RUN mkdir -p src && cd src \
- && git clone --branch kinetic https://github.com/athackst/aws_deepracer_msgs.git \
- && cd ../ \
- && catkin_make install -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic
+  && git clone --branch kinetic https://github.com/athackst/aws_deepracer_msgs.git \
+  && cd ../ \
+  && catkin_make install -DCMAKE_INSTALL_PREFIX=/opt/ros/melodic
 
 #
 # Build the ros2 messages
 # ------------------------
-FROM athackst/ros2:eloquent-dev as ros2_builder
+FROM athackst/ros2:eloquent-dev AS ros2_builder
 
 WORKDIR /workspaces/ros2
 
 RUN mkdir -p src && cd src \
- && git clone --branch eloquent https://github.com/athackst/aws_deepracer_msgs.git \
- && cd ../ \
- && colcon build --merge-install --install-base /opt/ros/eloquent
+  && git clone --branch eloquent https://github.com/athackst/aws_deepracer_msgs.git \
+  && cd ../ \
+  && colcon build --merge-install --install-base /opt/ros/eloquent
 
 #
 # Build the ros1_bridge
 # -----------------------
-FROM athackst/ros2:eloquent-dev as ros1_bridge_builder
+FROM athackst/ros2:eloquent-dev AS ros1_bridge_builder
 
 # install melodic
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
   && apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
   && apt-get update \
   && apt-get install -y ros-melodic-ros-base \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Get the ros messages
@@ -57,6 +58,7 @@ RUN apt-get update && apt-get install -y \
   libboost-signals-dev \
   libboost-thread-dev \
   liblog4cxx-dev \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Set up the environment
@@ -79,9 +81,9 @@ ENV CMAKE_PREFIX_PATH=/opt/ros/eloquent:/opt/ros/melodic
 # Build the bridge
 WORKDIR /workspaces/ros1_bridge
 RUN mkdir -p src && cd src \
-&& git clone --branch eloquent_dev https://github.com/athackst/ros1_bridge.git \
-&& cd ../ \
-&& colcon build --merge-install --packages-select ros1_bridge --cmake-force-configure --install-base /opt/ros/eloquent
+  && git clone --branch eloquent_dev https://github.com/athackst/ros1_bridge.git \
+  && cd ../ \
+  && colcon build --merge-install --packages-select ros1_bridge --cmake-force-configure --install-base /opt/ros/eloquent
 
 #
 # Run the ros1_bridge
@@ -93,6 +95,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main"
   && apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
   && apt-get update \
   && apt-get install -y ros-melodic-ros-base \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Copy the ros outputs
@@ -117,6 +120,7 @@ RUN apt-get update && apt-get install -y \
   libboost-signals-dev \
   libboost-thread-dev \
   liblog4cxx-dev \
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Set up the environment

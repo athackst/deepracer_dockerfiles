@@ -1,7 +1,7 @@
 #
 # Build stage
 # ------------------------
-FROM athackst/ros:kinetic-dev as builder
+FROM athackst/ros:kinetic-dev AS builder
 
 WORKDIR /workspaces/deepracer_ws/src
 RUN git clone https://github.com/athackst/deepracer_joy.git \
@@ -11,6 +11,7 @@ RUN git clone https://github.com/athackst/deepracer_joy.git \
   && apt-get update && rosdep update \
   && rosdep keys --from-path . --ignore-src | xargs rosdep resolve | grep -v "#" > /packages.txt \
   && cat /packages.txt | xargs sudo apt-get install -y --no-install-recommends \ 
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \ 
   # Install the packages into the opt directory.
   && cd ../ \
@@ -27,6 +28,7 @@ COPY --from=builder /packages.txt /packages.txt
 # Install all dependent packages.
 RUN apt-get update \
   && cat /packages.txt | xargs sudo apt-get install -y --no-install-recommends \ 
+  && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Set up environment.
