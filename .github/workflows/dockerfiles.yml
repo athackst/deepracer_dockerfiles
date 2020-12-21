@@ -4,6 +4,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron: "0 0 1 * *"
+  pull_request:
   push:
     branches:
       - main
@@ -43,8 +44,9 @@ jobs:
           context: ${{ matrix.docker_image }}
           file: ./${{ matrix.docker_image }}/Dockerfile
           tags: athackst/deepracer:${{ matrix.docker_image }},athackst/deepracer:${{ matrix.docker_image }}-${{ env.TODAY }}
-          push: true
+          push: github.ref == 'refs/heads/main'
   readme:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
