@@ -8,7 +8,7 @@ RUN git clone https://github.com/athackst/deepracer_joy.git \
   && git clone https://github.com/athackst/aws_deepracer_msgs.git \
   # Get all of the dependent packages.
   # This ensures that the base image will have all dependencies.
-  && apt-get update && rosdep update \
+  && apt-get update && rosdep update --rosdistro=kinetic\
   && rosdep keys --from-path . --ignore-src | xargs rosdep resolve | grep -v "#" > /packages.txt \
   && cat /packages.txt | xargs sudo apt-get install -y --no-install-recommends \ 
   && apt-get clean \
