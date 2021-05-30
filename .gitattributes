@@ -1,0 +1,4 @@
+.devcontainer/** linguist-detectable=false
+.github/** linguist-detectable=false
+.vscode/** linguist-detectable=false
+
