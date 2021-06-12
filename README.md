@@ -10,8 +10,8 @@ Joystick control for the DeepRacer.
 
 See:
 
-- [Controlling the DeepRacer with a gamepad](https://www.allisonthackston.com/articles/3_aws_deepracer_joy.html)
-- [Running the gamepad onboard the DeepRacer](https://www.allisonthackston.com/articles/4_aws_deepracer_joy_onboard.html)
+- [Controlling the DeepRacer with a gamepad](https://www.allisonthackston.com/articles/aws-deepracer-3-joy.html)
+- [Running the gamepad onboard the DeepRacer](https://www.allisonthackston.com/articles/aws-deepracer-4-joy-onboard.html)
 
 ## athackst/deepracer:ros1_bridge
 
@@ -19,7 +19,7 @@ Bridge the deepracer to ROS2 eloquent.
 
 See:
 
-- [Running the DeepRacer with ROS2](https://www.allisonthackston.com/articles/5_aws_deepracer_ros1_bridge.html)
+- [Running the DeepRacer with ROS2](https://www.allisonthackston.com/articles/aws-deepracer-5-ros1-bridge.html)
 - [Bridging ROS and ROS2](https://www.allisonthackston.com/articles/bridging_ros_ros2.html)
 
 ## athackst/deepracer:eloquent_msgs

@@ -5,6 +5,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  repository_dispatch:
+    types: [publish-docs]
 
 jobs:
   publish-docs:
@@ -15,4 +17,5 @@ jobs:
       - name: Setup config
         uses: athackst/athackst.mkdocs@main
       - name: Build and push docs to gh-pages
-        uses: athackst/mkdocs-simple-plugin@v0.8.1
+        uses: athackst/mkdocs-simple-plugin@v0.8.1my-event
+
