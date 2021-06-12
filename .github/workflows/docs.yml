@@ -17,5 +17,5 @@ jobs:
       - name: Setup config
         uses: athackst/athackst.mkdocs@main
       - name: Build and push docs to gh-pages
-        uses: athackst/mkdocs-simple-plugin@v0.8.1my-event
+        uses: athackst/mkdocs-simple-plugin@v0.8.1
 
