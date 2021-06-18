@@ -17,5 +17,10 @@ jobs:
       - name: Setup config
         uses: athackst/athackst.mkdocs@main
       - name: Build and push docs to gh-pages
-        uses: athackst/mkdocs-simple-plugin@v1.0.0
+        uses: athackst/mkdocs-simple-plugin@main
+      - name: Htmlproofer
+        uses: athackst/htmlproofer-action@main
+        with:
+          directory: site
+
 
