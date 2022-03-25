@@ -1,7 +1,7 @@
 #
 # Build stage
 # ------------------------
-FROM athackst/ros:kinetic-dev AS builder
+FROM althack/ros:kinetic-dev AS builder
 
 WORKDIR /workspaces/deepracer_ws/src
 RUN git clone https://github.com/athackst/deepracer_joy.git \
@@ -19,7 +19,7 @@ RUN git clone https://github.com/athackst/deepracer_joy.git \
 #
 # Deployment stage
 # ------------------------
-FROM athackst/ros:kinetic-base
+FROM althack/ros:kinetic-base
 
 # Get the installation artifacts from the builder image
 COPY --from=builder /opt/deepracer_ws/ /opt/deepracer_ws/
